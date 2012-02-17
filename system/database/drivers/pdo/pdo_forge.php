@@ -119,8 +119,16 @@ class CI_DB_pdo_forge extends CI_DB_forge {
 
 				if (array_key_exists('CONSTRAINT', $attributes))
 				{
+<<<<<<< HEAD
 					// Exception for Postgre numeric which not too happy with constraint within those type
 					if ( ! ($this->db->pdodriver == 'pgsql' && in_array($attributes['TYPE'], $numeric)))
+=======
+					if (strpos($this->db->hostname, 'pgsql') !== FALSE && in_array($attributes['TYPE'], $numeric))
+					{
+						// Do nothing
+					}
+					else
+>>>>>>> 8a133d1ed73a6c91512fd17254803896a67c4237
 					{
 						$sql .= '('.$attributes['CONSTRAINT'].')';
 					}
