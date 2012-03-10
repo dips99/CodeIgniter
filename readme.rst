@@ -10,6 +10,13 @@ interface and logical structure to access these libraries. CodeIgniter lets
 you creatively focus on your project by minimizing the amount of code needed
 for a given task.
 
+*******
+Status
+*******
+
+`<img src="https://secure.travis-ci.org/EllisLab/CodeIgniter.png?branch=feature/unit-tests">
+<http://travis-ci.org/EllisLab/CodeIgniter>`_
+
 *******************
 Release Information
 *******************
