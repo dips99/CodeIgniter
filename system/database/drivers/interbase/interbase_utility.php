@@ -1,13 +1,13 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
  * An open source application development framework for PHP 5.2.4 or newer
  *
  * NOTICE OF LICENSE
- * 
+ *
  * Licensed under the Open Software License version 3.0
- * 
+ *
  * This source file is subject to the Open Software License (OSL 3.0) that is
  * bundled with this package in the files license.txt / license.rst.  It is
  * also available through the world wide web at this URL:
@@ -21,30 +21,38 @@
  * @copyright	Copyright (c) 2008 - 2012, EllisLab, Inc. (http://ellislab.com/)
  * @license		http://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * @link		http://codeigniter.com
- * @since		Version 1.0
+ * @since		Version 3.0
  * @filesource
  */
 
 // ------------------------------------------------------------------------
 
 /**
- * MS SQL Utility Class
+ * Interbase/Firebird Utility Class
  *
  * @category	Database
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/database/
  */
-class CI_DB_mssql_utility extends CI_DB_utility {
+class CI_DB_interbase_utility extends CI_DB_utility {
 
 	/**
 	 * List databases
 	 *
-	 * @access	private
+	 * I don't believe you can do a database listing with Firebird
+	 * since each database is its own file.  I suppose we could
+	 * try reading a directory looking for Firebird files, but
+	 * that doesn't seem like a terribly good idea
+	 *
 	 * @return	bool
 	 */
-	function _list_databases()
+	public function _list_databases()
 	{
-		return "EXEC sp_helpdb"; // Can also be: EXEC sp_databases
+		if ($this->db_debug)
+		{
+			return $this->db->display_error('db_unsuported_feature');
+		}
+		return FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -52,15 +60,14 @@ class CI_DB_mssql_utility extends CI_DB_utility {
 	/**
 	 * Optimize table query
 	 *
-	 * Generates a platform-specific query so that a table can be optimized
+	 * Is optimization even supported in Interbase/Firebird?
 	 *
-	 * @access	private
 	 * @param	string	the table name
 	 * @return	object
 	 */
-	function _optimize_table($table)
+	public function _optimize_table($table)
 	{
-		return FALSE; // Is this supported in MS SQL?
+		return FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -68,33 +75,41 @@ class CI_DB_mssql_utility extends CI_DB_utility {
 	/**
 	 * Repair table query
 	 *
-	 * Generates a platform-specific query so that a table can be repaired
+	 * Table repairs are not supported in Interbase/Firebird
 	 *
-	 * @access	private
 	 * @param	string	the table name
 	 * @return	object
 	 */
-	function _repair_table($table)
+	public function _repair_table($table)
 	{
-		return FALSE; // Is this supported in MS SQL?
+		return FALSE;
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
-	 * MSSQL Export
+	 * Interbase/Firebird Export
 	 *
-	 * @access	private
-	 * @param	array	Preferences
+	 * @param	string	$filename
 	 * @return	mixed
 	 */
-	function _backup($params = array())
+	public function backup($filename)
 	{
-		// Currently unsupported
-		return $this->db->display_error('db_unsuported_feature');
+		if ($service = ibase_service_attach($this->db->hostname, $this->db->username, $this->db->password))
+		{
+			$res = ibase_backup($service, $this->db->database, $filename.'.fbk');
+			
+			//Close the service connection	
+			ibase_service_detach($service);
+			
+			return $res;
+		}
+		else
+		{
+			return FALSE;
+		}
 	}
-
 }
 
-/* End of file mssql_utility.php */
-/* Location: ./system/database/drivers/mssql/mssql_utility.php */
+/* End of file interbase_utility.php */
+/* Location: ./system/database/drivers/interbase/interbase_utility.php */
