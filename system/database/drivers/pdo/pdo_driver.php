@@ -63,7 +63,6 @@ class CI_DB_pdo_driver extends CI_DB {
 
 	public function __construct($params)
 	{
-		var_dump('construct');
 		parent::__construct($params);
 
 		if (preg_match('/([^;]+):/', $this->dsn, $match) && count($match) == 2)
@@ -166,6 +165,7 @@ class CI_DB_pdo_driver extends CI_DB {
 	    }
 	    elseif ($this->pdodriver === 'sqlite' && $this->dsn === 'sqlite:')
 	    {
+	    	var_dump('here');
 	        if ($this->database !== ':memory')
 	        {
 	            if ( ! file_exists($this->database))
