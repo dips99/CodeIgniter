@@ -239,6 +239,7 @@ class CI_DB_pdo_driver extends CI_DB {
 			{
 				$this->display_error($e->getMessage(), '', TRUE);
 			}
+			var_dump($e->getMessage());
 
 			return FALSE;
 		}
