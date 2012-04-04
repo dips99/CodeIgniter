@@ -107,7 +107,6 @@ class CI_DB_pdo_driver extends CI_DB {
 	 */
 	protected function _connect_string($params)
 	{
-		var_dump('connect string');
 		if (strpos($this->hostname, ':'))
 		{
 			// hostname generally would have this prototype
@@ -165,7 +164,6 @@ class CI_DB_pdo_driver extends CI_DB {
 	    }
 	    elseif ($this->pdodriver === 'sqlite' && $this->dsn === 'sqlite:')
 	    {
-	    	var_dump('here');
 	        if ($this->database !== ':memory')
 	        {
 	            if ( ! file_exists($this->database))
@@ -184,7 +182,6 @@ class CI_DB_pdo_driver extends CI_DB {
 	    {
 	        $this->dsn .= 'charset='.$this->char_set.';';
 	    }
-		var_dump('connect string end');
 	}
 
 	/**
@@ -194,7 +191,6 @@ class CI_DB_pdo_driver extends CI_DB {
 	 */
 	public function db_connect()
 	{
-		var_dump('db_connect');
 		$this->options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_SILENT;
 
 		return $this->pdo_connect();
@@ -209,7 +205,6 @@ class CI_DB_pdo_driver extends CI_DB {
 	 */
 	public function db_pconnect()
 	{
-		var_dump('db_pconnect');
 		$this->options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_SILENT;
 		$this->options[PDO::ATTR_PERSISTENT] = TRUE;
 
@@ -225,7 +220,6 @@ class CI_DB_pdo_driver extends CI_DB {
 	 */
 	public function pdo_connect()
 	{
-		var_dump('HEY');
 		// Refer : http://php.net/manual/en/ref.pdo-mysql.connection.php
 		if ($this->pdodriver === 'mysql' && ! is_php('5.3.6'))
 		{
@@ -243,7 +237,6 @@ class CI_DB_pdo_driver extends CI_DB {
 			{
 				$this->display_error($e->getMessage(), '', TRUE);
 			}
-			var_dump($e->getMessage());
 
 			return FALSE;
 		}
