@@ -115,6 +115,8 @@ abstract class CI_DB_driver {
 		var_dump($this->pconnect);
 		var_dump(is_callable(array($this, 'db_connect')));
 		var_dump(is_callable(array($this, 'db_pconnect')));
+		var_dump($this->db_connect());
+		var_dump($this->db_pconnect());
 		// Connect to the database and set the connection ID
 		$this->conn_id = ($this->pconnect == FALSE) ? $this->db_connect() : $this->db_pconnect();
 		var_dump('two');
