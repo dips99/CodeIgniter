@@ -227,6 +227,7 @@ class CI_DB_pdo_driver extends CI_DB {
 		}
 
 		// Connecting...
+		var_dump('almost there..');
 		try
 		{
 			$db = new PDO($this->dsn, $this->username, $this->password, $this->options);
