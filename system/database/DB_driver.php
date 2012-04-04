@@ -111,11 +111,13 @@ abstract class CI_DB_driver {
 		}
 
 		// ----------------------------------------------------------------
-
+		var_dump('one');
 		// Connect to the database and set the connection ID
 		$this->conn_id = ($this->pconnect == FALSE) ? $this->db_connect() : $this->db_pconnect();
+		var_dump('two');
 
 		// No connection resource? Check if there is a failover else throw an error
+		var_dump('there');
 		if ( ! $this->conn_id)
 		{
 			// Check if there is a failover set
@@ -153,6 +155,7 @@ abstract class CI_DB_driver {
 				return FALSE;
 			}
 		}
+		var_dump('four');
 
 		// ----------------------------------------------------------------
 
