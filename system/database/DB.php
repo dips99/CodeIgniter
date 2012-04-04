@@ -144,7 +144,7 @@ function &DB($params = '', $active_record_override = NULL)
 	// Instantiate the DB adapter
 	$driver = 'CI_DB_'.$params['dbdriver'].'_driver';
 	$DB = new $driver($params);
-
+	var_dump('hey');
 	if ($DB->autoinit == TRUE)
 	{
 		try
@@ -156,6 +156,7 @@ function &DB($params = '', $active_record_override = NULL)
 			var_dump($e->getMessage());die;
 		}
 	}
+	var_dump('hey too');
 
 	if (isset($params['stricton']) && $params['stricton'] == TRUE)
 	{
