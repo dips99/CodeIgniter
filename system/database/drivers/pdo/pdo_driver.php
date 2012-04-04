@@ -222,6 +222,7 @@ class CI_DB_pdo_driver extends CI_DB {
 	 */
 	public function pdo_connect()
 	{
+		var_dump('HEY');
 		// Refer : http://php.net/manual/en/ref.pdo-mysql.connection.php
 		if ($this->pdodriver === 'mysql' && ! is_php('5.3.6'))
 		{
