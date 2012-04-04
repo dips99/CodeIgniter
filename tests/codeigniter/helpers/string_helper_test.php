@@ -1,9 +1,27 @@
 <?php
 
-require_once(BASEPATH.'helpers/string_helper.php');
+class String_helper_test extends CI_TestCase {
 
-class String_helper_test extends CI_TestCase
-{
+	public function set_up()
+	{
+		$this->helper('string');
+	}
+
+	public function test_strip_slashes()
+	{
+		$expected = array(
+			"Is your name O'reilly?", 
+			"No, my name is O'connor."
+		);
+		
+		$str = array(
+			"Is your name O\'reilly?",
+			"No, my name is O\'connor."
+		);
+		
+		$this->assertEquals($expected, strip_slashes($str));
+	}
+	
 	public function test_trim_slashes()
 	{
 		$strs = array(

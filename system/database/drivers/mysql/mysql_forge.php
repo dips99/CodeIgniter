@@ -42,7 +42,7 @@ class CI_DB_mysql_forge extends CI_DB_forge {
 	 */
 	public function _create_database($name)
 	{
-		return 'CREATE DATABASE '.$name;
+		return 'CREATE DATABASE '.$name.' CHARACTER SET '.$this->db->char_set.' COLLATE '.$this->db->dbcollat;
 	}
 
 	// --------------------------------------------------------------------
@@ -66,7 +66,7 @@ class CI_DB_mysql_forge extends CI_DB_forge {
 	 * @param	mixed	the fields
 	 * @return	string
 	 */
-	private function _process_fields($fields)
+	protected function _process_fields($fields)
 	{
 		$current_field_count = 0;
 		$sql = '';
