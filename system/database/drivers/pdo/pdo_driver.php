@@ -63,6 +63,7 @@ class CI_DB_pdo_driver extends CI_DB {
 
 	public function __construct($params)
 	{
+		var_dump('construct');
 		parent::__construct($params);
 
 		if (preg_match('/([^;]+):/', $this->dsn, $match) && count($match) == 2)
@@ -193,6 +194,7 @@ class CI_DB_pdo_driver extends CI_DB {
 	 */
 	public function db_connect()
 	{
+		var_dump('db_connect');
 		$this->options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_SILENT;
 
 		return $this->pdo_connect();
@@ -207,6 +209,7 @@ class CI_DB_pdo_driver extends CI_DB {
 	 */
 	public function db_pconnect()
 	{
+		var_dump('db_pconnect');
 		$this->options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_SILENT;
 		$this->options[PDO::ATTR_PERSISTENT] = TRUE;
 
