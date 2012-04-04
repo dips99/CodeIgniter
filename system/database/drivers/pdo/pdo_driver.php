@@ -107,6 +107,7 @@ class CI_DB_pdo_driver extends CI_DB {
 	 */
 	protected function _connect_string($params)
 	{
+		var_dump('connect string');
 		if (strpos($this->hostname, ':'))
 		{
 			// hostname generally would have this prototype
@@ -182,6 +183,7 @@ class CI_DB_pdo_driver extends CI_DB {
 	    {
 	        $this->dsn .= 'charset='.$this->char_set.';';
 	    }
+		var_dump('connect string end');
 	}
 
 	/**
