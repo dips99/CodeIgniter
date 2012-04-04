@@ -1132,7 +1132,6 @@ abstract class CI_DB_driver {
 	 */
 	public function display_error($error = '', $swap = '', $native = FALSE)
 	{
-		var_dump($error);die;
 		$LANG =& load_class('Lang', 'core');
 		$LANG->load('db');
 

@@ -147,7 +147,14 @@ function &DB($params = '', $active_record_override = NULL)
 
 	if ($DB->autoinit == TRUE)
 	{
-		$DB->initialize();
+		try
+		{
+			$DB->initialize();
+		}
+		catch (Exception $e)
+		{
+			var_dump($e->getMessage());die;
+		}
 	}
 
 	if (isset($params['stricton']) && $params['stricton'] == TRUE)
