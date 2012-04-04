@@ -10,9 +10,8 @@ return array(
 
 	// Database configuration with failover
 	'pdo/sqlite_failover' => array(
-		'dsn' => 'sqlite:/'.realpath(__DIR__.'/..').'/ci_test.sqlite',
+		'dsn' => 'sqlite:/'.realpath(__DIR__.'/..').'/not_exists.sqlite',
 		'dbdriver' => 'pdo',
-		'dbdebug' => 'false',
 		'failover' => array(
 			array(
 				'dsn' => 'sqlite:/'.realpath(__DIR__.'/..').'/ci_test.sqlite',
