@@ -16,7 +16,7 @@ return array(
 		'failover' => array(
 			array(
 				'dsn' => 'sqlite:/'.realpath(__DIR__.'/..').'/ci_test.sqlite',
-				'dbdriver' => 'pdo',
+				'dbdriver' => 'pdo', 
 				'pdodriver' => 'sqlite',
 			),
 		),
