@@ -15,6 +15,7 @@ env:
 
 before_script:
   - pyrus install http://pear.phpunit.de/get/PHPUnit_Selenium-1.2.6.tgz
+  - pyrus channel-discover pear.php-tools.net
   - pyrus install http://pear.php-tools.net/get/vfsStream-0.11.2.tgz
   - phpenv rehash
   - sh -c "if [ '$DB' = 'pgsql' ] || [ '$DB' = 'pdo/pgsql' ]; then psql -c 'DROP DATABASE IF EXISTS ci_test;' -U postgres; fi"
