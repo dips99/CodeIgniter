@@ -21,10 +21,7 @@ before_script:
   - sh -c "if [ '$DB' = 'pgsql' ] || [ '$DB' = 'pdo/pgsql' ]; then psql -c 'create database ci_test;' -U postgres; fi"
   - sh -c "if [ '$DB' = 'mysql' ] || [ '$DB' = 'pdo/mysql' ]; then mysql -e 'create database IF NOT EXISTS ci_test;'; fi"
   - sh -c "if [ '$DB' = 'application' ]; then wget http://selenium.googlecode.com/files/selenium-server-standalone-2.21.0.jar; fi"
-  - sh -c "if [ '$DB' = 'application' ]; then echo '#!/bin/sh' >> selenium.sh; fi"
-  - sh -c "if [ '$DB' = 'application' ]; then echo 'java -jar selenium-server-standalone-2.21.0.jar' >> selenium.sh; fi"
-  - sh -c "if [ '$DB' = 'application' ]; then sudo chmod +x selenium.sh >> selenium.sh; fi"
-  - sh -c "if [ '$DB' = 'application' ]; then nohup ./selenium.sh '&'; fi"
+  - sh -c "if [ '$DB' = 'application' ]; then nohup java -jar selenium-server-standalone-2.21.0.jar '&'; fi"
 
 script: phpunit --configuration tests/travis/$DB.phpunit.xml
 
