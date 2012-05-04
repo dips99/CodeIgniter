@@ -11,14 +11,19 @@ env:
   - DB=pdo/mysql
   - DB=pdo/pgsql
   - DB=pdo/sqlite
+  - DB=application
 
 before_script:
+  - pyrus channel-discover pear.phpunit.de
+  - pyrus install http://pear.phpunit.de/get/PHPUnit_Selenium-1.2.6.tgz
   - pyrus channel-discover pear.php-tools.net
   - pyrus install http://pear.php-tools.net/get/vfsStream-0.11.2.tgz
   - phpenv rehash
   - sh -c "if [ '$DB' = 'pgsql' ] || [ '$DB' = 'pdo/pgsql' ]; then psql -c 'DROP DATABASE IF EXISTS ci_test;' -U postgres; fi"
   - sh -c "if [ '$DB' = 'pgsql' ] || [ '$DB' = 'pdo/pgsql' ]; then psql -c 'create database ci_test;' -U postgres; fi"
   - sh -c "if [ '$DB' = 'mysql' ] || [ '$DB' = 'pdo/mysql' ]; then mysql -e 'create database IF NOT EXISTS ci_test;'; fi"
+  - sh -c "if [ '$DB' = 'application' ]; then wget http://selenium.googlecode.com/files/selenium-server-standalone-2.21.0.jar; fi"
+  - sh -c "if [ '$DB' = 'application' ]; then java -jar selenium-server-standalone-2.21.0.jar; fi"
 
 script: phpunit --configuration tests/travis/$DB.phpunit.xml
 
@@ -26,3 +31,4 @@ branches:
   only:
     - develop
     - master
+    - application-tests
