@@ -18,12 +18,18 @@ before_script:
   - pyrus channel-discover pear.php-tools.net
   - pyrus install http://pear.php-tools.net/get/vfsStream-0.11.2.tgz
   - phpenv rehash
-  - sudo apt-get install screen
   - sh -c "if [ '$DB' = 'pgsql' ] || [ '$DB' = 'pdo/pgsql' ]; then psql -c 'DROP DATABASE IF EXISTS ci_test;' -U postgres; fi"
   - sh -c "if [ '$DB' = 'pgsql' ] || [ '$DB' = 'pdo/pgsql' ]; then psql -c 'create database ci_test;' -U postgres; fi"
   - sh -c "if [ '$DB' = 'mysql' ] || [ '$DB' = 'pdo/mysql' ]; then mysql -e 'create database IF NOT EXISTS ci_test;'; fi"
   - sh -c "if [ '$DB' = 'application' ]; then wget http://selenium.googlecode.com/files/selenium-server-standalone-2.21.0.jar; fi"
-  - sh -c "if [ '$DB' = 'application' ]; then screen java -jar selenium-server-standalone-2.21.0.jar nogui; fi"
+  - sh -c "if [ '$DB' = 'application' ]; then sudo makedir /usr/lib/selenium; fi"
+  - sh -c "if [ '$DB' = 'application' ]; then sudo cp selenium-server-standalone-2.21.0.jar /usr/lib/selenium/selenium-server-standalone-2.21.0.jar; fi"
+  - sh -c "if [ '$DB' = 'application' ]; then sudo cp selenium.sh /etc/init.d/selenium; fi"
+  - sh -c "if [ '$DB' = 'application' ]; then sudo chmod 755 /etc/init.d/selenium; fi"
+  - sh -c "if [ '$DB' = 'application' ]; then sudo makedir /var/log/selenium; fi"
+  - sh -c "if [ '$DB' = 'application' ]; then sudo chmod a+w /var/log/selenium; fi"
+  - sh -c "if [ '$DB' = 'application' ]; then sudo /etc/init.d/selenium start; fi"
+  - sh -c "if [ '$DB' = 'application' ]; then sudo /etc/init.d/selenium restart; fi"
 
 script: phpunit --configuration tests/travis/$DB.phpunit.xml
 
