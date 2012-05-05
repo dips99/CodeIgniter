@@ -28,10 +28,13 @@ before_script:
   - ls
   - sh -c "if [ '$DB' = 'application' ]; then sudo mkdir /usr/lib/selenium; fi"
   - sh -c "if [ '$DB' = 'application' ]; then sudo cp selenium-server-standalone-2.21.0.jar /usr/lib/selenium/selenium-server-standalone-2.21.0.jar; fi"
+  - ls /usr/lib/selenium
   - sh -c "if [ '$DB' = 'application' ]; then sudo cp selenium.sh /etc/init.d/selenium; fi"
   - sh -c "if [ '$DB' = 'application' ]; then sudo chmod 755 /etc/init.d/selenium; fi"
+  - ls /etc/init.d
   - sh -c "if [ '$DB' = 'application' ]; then sudo mkdir /var/log/selenium; fi"
   - sh -c "if [ '$DB' = 'application' ]; then sudo chmod a+w /var/log/selenium; fi"
+  - ls /var/log
   - sh -c "if [ '$DB' = 'application' ]; then /etc/init.d/selenium start; fi"
   - sh -c "if [ '$DB' = 'application' ]; then /etc/init.d/selenium start; fi"
   - ps aux | grep selenium
