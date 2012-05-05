@@ -46,7 +46,7 @@ case "${1:-''}" in
                 fi
                 ;;
         *)      # no parameter specified
-                echo "Usage: $SELF start|stop|restart|reload|force-reload|status"
+                echo "Usage: $SELF start|stop|restart"
                 exit 1
         ;;
 esac

@@ -21,21 +21,15 @@ before_script:
   - sh -c "if [ '$DB' = 'pgsql' ] || [ '$DB' = 'pdo/pgsql' ]; then psql -c 'DROP DATABASE IF EXISTS ci_test;' -U postgres; fi"
   - sh -c "if [ '$DB' = 'pgsql' ] || [ '$DB' = 'pdo/pgsql' ]; then psql -c 'create database ci_test;' -U postgres; fi"
   - sh -c "if [ '$DB' = 'mysql' ] || [ '$DB' = 'pdo/mysql' ]; then mysql -e 'create database IF NOT EXISTS ci_test;'; fi"
-  - sh -c "if [ '$DB' = 'application' ]; then sudo apt-get -y install firefox; fi"
   - sh -c "if [ '$DB' = 'application' ]; then wget http://selenium.googlecode.com/files/selenium-server-standalone-2.21.0.jar; fi"
-  - ls
   - sh -c "if [ '$DB' = 'application' ]; then sudo mkdir /usr/lib/selenium; fi"
   - sh -c "if [ '$DB' = 'application' ]; then sudo cp selenium-server-standalone-2.21.0.jar /usr/lib/selenium/selenium-server-standalone-2.21.0.jar; fi"
-  - ls /usr/lib/selenium
   - sh -c "if [ '$DB' = 'application' ]; then sudo cp selenium.sh /etc/init.d/selenium; fi"
   - sh -c "if [ '$DB' = 'application' ]; then sudo chmod 755 /etc/init.d/selenium; fi"
-  - ls /etc/init.d
   - sh -c "if [ '$DB' = 'application' ]; then sudo mkdir /var/log/selenium; fi"
   - sh -c "if [ '$DB' = 'application' ]; then sudo chmod a+w /var/log/selenium; fi"
-  - ls /var/log
   - sh -c "if [ '$DB' = 'application' ]; then /etc/init.d/selenium start; fi"
-  - sh -c "if [ '$DB' = 'application' ]; then /etc/init.d/selenium start; fi"
-  - ps aux | grep selenium
+  - ps aux | grep 2.21
 
 script: phpunit --configuration tests/travis/$DB.phpunit.xml
 
