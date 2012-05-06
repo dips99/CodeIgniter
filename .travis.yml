@@ -21,7 +21,7 @@ before_script:
   - sudo mv /etc/lighttpd/lighttpd.conf.new /etc/lighttpd/lighttpd.conf
   - sudo /etc/init.d/lighttpd restart
   - "sleep 4"
-  - "sudo echo '<?php phpinfo() ?>' >> sudo /var/www/test.php
+  - "sudo echo '<?php phpinfo() ?>' >> sudo /var/www/test.php"
   - "curl -v http://127.0.0.1/test.php"
   - "sudo mkdir /var/www/codeigniter"
   - "sudo chmod 777 /var/www/codeigniter -R"
