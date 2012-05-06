@@ -18,7 +18,9 @@ before_script:
   - "sudo cp index.php /var/www/codeigniter/index.php"
   - "sudo cp application/ /var/www/codeigniter/ -r"
   - "sudo cp system/ /var/www/codeigniter/ -r"
-  - "curl -v http://127.0.0.1/codeigniter"
+  - ls /var/www
+  - ls /var/www/codeigniter
+  - "curl -v http://127.0.0.1/codeigniter/index.php"
 
 script: phpunit --configuration tests/travis/$DB.phpunit.xml
 
