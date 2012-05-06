@@ -9,18 +9,9 @@ env:
 
 before_script:
   - "sudo apt-get -qq update"
-  - "sudo apt-get -y -qq install lighttpd"
-  - "sudo apt-get -y -qq install php5-cgi"
-  - "sudo echo 'cgi.fix_pathinfo = 1' >> sudo /etc/php5/cgi/php.ini"
-  - ls /usr/local/bin
-  - sudo cp /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf.new
-  - sudo sed 's/mod_accesslog/mod_fastcgi/g' /etc/lighttpd/lighttpd.conf > sudo /etc/lighttpd/lighttpd.conf.new
-  - sudo echo 'fastcgi.server = ( ".php" => ((' >> sudo /etc/lighttpd/lighttpd.conf.new
-  - sudo echo '"bin-path" => "/usr/bin/php5-cgi",' >> sudo /etc/lighttpd/lighttpd.conf.new
-  - sudo echo '"socket" => "/tmp/php.socket"' >> sudo /etc/lighttpd/lighttpd.conf.new
-  - sudo echo ')))' >> sudo /etc/lighttpd/lighttpd.conf.new
-  - sudo mv /etc/lighttpd/lighttpd.conf.new /etc/lighttpd/lighttpd.conf
-  - sudo /etc/init.d/lighttpd restart
+  - "sudo apt-get -y -qq install apache2"
+  - "sudo apt-get -y -qq install libapache2-mod-php5"
+  - sudo /etc/init.d/apache2 restart
   - "sleep 4"
   - "sudo echo '<?php phpinfo() ?>' >> sudo /var/www/test.php"
   - "curl -v http://127.0.0.1/test.php"
