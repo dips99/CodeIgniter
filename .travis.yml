@@ -9,7 +9,9 @@ env:
 
 before_script:
   - "sudo apt-get install lighttpd"
-  - "curl -v http://127.0.0.1/codeigniter"
+  - "curl -v http://127.0.0.1/"
+  - "ls /var"
+  - "ls /var/www"
   - "sleep 4"
   - "sudo mkdir /var/www/codeigniter"
   - "sudo chmod 777 /var/www/codeigniter -R"
