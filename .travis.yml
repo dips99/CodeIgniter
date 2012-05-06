@@ -12,9 +12,9 @@ env:
   - DB=pdo/pgsql
   - DB=pdo/sqlite
   - DB=application
+  - DIPLAY=:0
 
 before_script:
-  - "export DISPLAY=:99.0"
   - pyrus install http://pear.phpunit.de/get/PHPUnit_Selenium-1.2.6.tgz
   - pyrus channel-discover pear.php-tools.net
   - pyrus install http://pear.php-tools.net/get/vfsStream-0.11.2.tgz
