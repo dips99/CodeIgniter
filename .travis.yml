@@ -9,9 +9,13 @@ env:
 
 before_script:
   - "sudo apt-get install lighttpd"
-  - "curl -v http://127.0.0.1/"
-  - "ls /var"
-  - "ls /var/www"
+  - "sudo apt-get install php5-cgi"
+  - "sudo echo 'cgi.fix_pathinfo = 1' >> /etc/php5/cgi/php.ini"
+  - sudo echo 'fastcgi.server = ( ".php" => ((' >> /etc/lighttpd/lighttpd.conf
+  - sudo echo '"bin-path" => "/usr/bin/php5-cgi",' >> /etc/lighttpd/lighttpd.conf
+  - sudo echo '"socket" => "/tmp/php.socket"' >> /etc/lighttpd/lighttpd.conf
+  - sudo echo ')))' >> /etc/lighttpd/lighttpd.conf
+  - sudo /etc/init.d/lighttpd restart
   - "sleep 4"
   - "sudo mkdir /var/www/codeigniter"
   - "sudo chmod 777 /var/www/codeigniter -R"
