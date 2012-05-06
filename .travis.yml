@@ -8,7 +8,8 @@ env:
   - DB=application
 
 before_script:
-  - "sudo apt-get install lighttpd"
+  - "sudo apt-get update"
+  - "sudo apt-get -y install lighttpd"
   - "sudo apt-get -y install php5-cgi"
   - "sudo echo 'cgi.fix_pathinfo = 1' >> /etc/php5/cgi/php.ini"
   - sudo echo 'fastcgi.server = ( ".php" => ((' >> /etc/lighttpd/lighttpd.conf
