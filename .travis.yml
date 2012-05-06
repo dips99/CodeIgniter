@@ -15,7 +15,7 @@ before_script:
   - sudo /etc/init.d/apache2 restart
   - "sleep 5"
   - ls /var/www
-  - "curl -v http://127.0.0.1/test.php"
+  - "curl -v http://127.0.0.1/"
 
 
 script: phpunit --configuration tests/travis/$DB.phpunit.xml
