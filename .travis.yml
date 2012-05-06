@@ -8,9 +8,9 @@ env:
   - DB=application
 
 before_script:
-  - "sudo apt-get update"
-  - "sudo apt-get -y install lighttpd"
-  - "sudo apt-get -y install php5-cgi"
+  - "sudo apt-get -qq update"
+  - "sudo apt-get -y -qq install lighttpd"
+  - "sudo apt-get -y -qq install php5-cgi"
   - "sudo echo 'cgi.fix_pathinfo = 1' >> sudo /etc/php5/cgi/php.ini"
   - sudo cp /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf.new
   - sudo sed 's/mod_accesslog/mod_fastcgi/g' /etc/lighttpd/lighttpd.conf > sudo /etc/lighttpd/lighttpd.conf.new
@@ -20,8 +20,9 @@ before_script:
   - sudo echo ')))' >> sudo /etc/lighttpd/lighttpd.conf.new
   - sudo mv /etc/lighttpd/lighttpd.conf.new /etc/lighttpd/lighttpd.conf
   - sudo /etc/init.d/lighttpd restart
-  - sudo /etc/init.d/lighttpd restart
   - "sleep 4"
+  - "sudo echo '<?php phpinfo() ?>' >> sudo /var/www/test.php
+  - "curl -v http://127.0.0.1/test.php"
   - "sudo mkdir /var/www/codeigniter"
   - "sudo chmod 777 /var/www/codeigniter -R"
   - "sudo cp index.php /var/www/codeigniter/index.php"
