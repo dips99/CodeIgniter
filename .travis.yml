@@ -15,7 +15,11 @@ env:
 
 before_script:
   - sudo apt-get install lighttpd
-  - curl -v 127.0.0.1
+  - sudo cp index.php /var/www/codeigniter/index.php
+  - sudo cp application/ /var/www/codeigniter/ -r
+  - sudo cp system/ /var/www/codeigniter/ -r
+  - sudo rm /var/www/index.html
+  - curl -v 127.0.0.1/codeigniter
 
 script: phpunit --configuration tests/travis/$DB.phpunit.xml
 
