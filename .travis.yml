@@ -14,17 +14,14 @@ env:
   - DB=application
 
 before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - pyrus install http://pear.phpunit.de/get/PHPUnit_Selenium-1.2.6.tgz
   - pyrus channel-discover pear.php-tools.net
   - pyrus install http://pear.php-tools.net/get/vfsStream-0.11.2.tgz
   - phpenv rehash
   - sh -c "if [ '$DB' = 'pgsql' ] || [ '$DB' = 'pdo/pgsql' ]; then psql -c 'DROP DATABASE IF EXISTS ci_test;' -U postgres; fi"
   - sh -c "if [ '$DB' = 'pgsql' ] || [ '$DB' = 'pdo/pgsql' ]; then psql -c 'create database ci_test;' -U postgres; fi"
   - sh -c "if [ '$DB' = 'mysql' ] || [ '$DB' = 'pdo/mysql' ]; then mysql -e 'create database IF NOT EXISTS ci_test;'; fi"
-  - sh -c "if [ '$DB' = 'application' ]; then sudo chmod +x before_application_test.sh; fi"
-  - sh -c "if [ '$DB' = 'application' ]; then ./before_application_test.sh; fi"
+  - sh -c "if [ '$DB' = 'application' ]; then sudo chmod +x application.sh; fi"
+  - sh -c "if [ '$DB' = 'application' ]; then ./application.sh; fi"
 
 script: phpunit --configuration tests/travis/$DB.phpunit.xml
 
