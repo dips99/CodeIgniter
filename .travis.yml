@@ -14,7 +14,7 @@ env:
   - DB=application
 
 before_script:
-  - sudo service apache2 status
+  - sudo apt-get install lighthttpd
   - curl -v 127.0.0.1
 
 script: phpunit --configuration tests/travis/$DB.phpunit.xml
