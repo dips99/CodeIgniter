@@ -11,9 +11,10 @@ before_script:
   - "sudo apt-get install lighttpd"
   - "curl -v http://127.0.0.1/codeigniter"
   - "sleep 4"
-  - "cp index.php /var/www/codeigniter/index.php"
-  - "cp application/ /var/www/codeigniter/ -r"
-  - "cp system/ /var/www/codeigniter/ -r"
+  - "sudo mkdir /var/www/codeigniter"
+  - "sudo cp index.php /var/www/codeigniter/index.php"
+  - "sudo cp application/ /var/www/codeigniter/ -r"
+  - "sudo cp system/ /var/www/codeigniter/ -r"
   - "curl -v http://127.0.0.1/codeigniter"
 
 script: phpunit --configuration tests/travis/$DB.phpunit.xml
