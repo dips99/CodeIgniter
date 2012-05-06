@@ -19,9 +19,9 @@ then
 	echo "${green}Set Up CodeIgniter on Root Directory...${endColor}"
 	sudo mkdir /var/www/codeigniter
 	sudo chmod 777 /var/www/codeigniter -R
-	sudo cp index.php /var/www/codeigniter/index.php
-	sudo cp application/ /var/www/codeigniter/ -r
-	sudo cp system/ /var/www/codeigniter/ -r
+	sudo cp ../index.php /var/www/codeigniter/index.php
+	sudo cp ../application/ /var/www/codeigniter/ -r
+	sudo cp ../system/ /var/www/codeigniter/ -r
 	echo "${green}CodeIgniter OK${endColor}"
 	echo "${green}Set Up Selenium...${endColor}"
 	wget http://selenium.googlecode.com/files/selenium-server-standalone-2.21.0.jar
