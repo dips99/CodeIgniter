@@ -12,10 +12,13 @@ before_script:
   - "sudo apt-get -y install lighttpd"
   - "sudo apt-get -y install php5-cgi"
   - "sudo echo 'cgi.fix_pathinfo = 1' >> sudo /etc/php5/cgi/php.ini"
-  - sudo echo 'fastcgi.server = ( ".php" => ((' >> sudo /etc/lighttpd/lighttpd.conf
-  - sudo echo '"bin-path" => "/usr/bin/php5-cgi",' >> sudo /etc/lighttpd/lighttpd.conf
-  - sudo echo '"socket" => "/tmp/php.socket"' >> sudo /etc/lighttpd/lighttpd.conf
-  - sudo echo ')))' >> sudo /etc/lighttpd/lighttpd.conf
+  - sudo sed 's/mod_accesslog/mod_fastcgi/g' /etc/lighttpd/lighttpd.conf > sudo /etc/lighttpd/lighttpd.conf.new
+  - sudo echo 'fastcgi.server = ( ".php" => ((' >> sudo /etc/lighttpd/lighttpd.conf.new
+  - sudo echo '"bin-path" => "/usr/bin/php5-cgi",' >> sudo /etc/lighttpd/lighttpd.conf.new
+  - sudo echo '"socket" => "/tmp/php.socket"' >> sudo /etc/lighttpd/lighttpd.conf.new
+  - sudo echo ')))' >> sudo /etc/lighttpd/lighttpd.conf.new
+  - sudo mv /etc/lighttpd/lighttpd.conf.new /etc/lighttpd/lighttpd.conf
+  - sudo /etc/init.d/lighttpd restart
   - sudo /etc/init.d/lighttpd restart
   - "sleep 4"
   - "sudo mkdir /var/www/codeigniter"
