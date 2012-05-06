@@ -1,16 +1,14 @@
 #!/bin/bash
-echo "Set Environment..."
-if export DISPLAY=:99.0
+if test -f selenium.sh
 then
+	echo "Set Environment..."
+	export DISPLAY=:99.0
 	sh -e /etc/init.d/xvfb start
 	pyrus install http://pear.phpunit.de/get/PHPUnit_Selenium-1.2.6.tgz
 	sudo apt-get -qq update
 	echo "Environment OK"
-fi
-
-echo "Set Web Server..."
-if sudo apt-get -y -qq install apache2
-then
+	echo "Set Web Server..."
+	sudo apt-get -y -qq install apache2
 	sudo apt-get -y -qq install libapache2-mod-php5
 	sudo /etc/init.d/apache2 restart
 	echo "Web Server OK"
@@ -32,5 +30,9 @@ then
 	/etc/init.d/selenium start
 	/etc/init.d/selenium restart
 	ps aux | grep 2.21
-	sleep 5	echo "Selenium OK"
+	sleep 5	
+	echo "Selenium OK"
+	echo "Application Test READY"
+else
+	echo "Application Test NOT READY"
 fi
