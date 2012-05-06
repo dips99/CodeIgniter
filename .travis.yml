@@ -12,6 +12,7 @@ before_script:
   - "curl -v http://127.0.0.1/codeigniter"
   - "sleep 4"
   - "sudo mkdir /var/www/codeigniter"
+  - "sudo chmod 777 mkdir /var/www/codeigniter -R"
   - "sudo cp index.php /var/www/codeigniter/index.php"
   - "sudo cp application/ /var/www/codeigniter/ -r"
   - "sudo cp system/ /var/www/codeigniter/ -r"
