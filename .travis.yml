@@ -12,6 +12,7 @@ before_script:
   - "sudo apt-get -y -qq install lighttpd"
   - "sudo apt-get -y -qq install php5-cgi"
   - "sudo echo 'cgi.fix_pathinfo = 1' >> sudo /etc/php5/cgi/php.ini"
+  - ls /usr/local/bin
   - sudo cp /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf.new
   - sudo sed 's/mod_accesslog/mod_fastcgi/g' /etc/lighttpd/lighttpd.conf > sudo /etc/lighttpd/lighttpd.conf.new
   - sudo echo 'fastcgi.server = ( ".php" => ((' >> sudo /etc/lighttpd/lighttpd.conf.new
